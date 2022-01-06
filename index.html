@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/scripts.js" defer></script>
+    <title>Formulário de Registro com Validações JavaScript</title>
+</head>
+<body>
+    <div id="main-container">
+        <h1>
+            Cadastre-se
+        </h1>
+        <form id="register-form" autocomplete="off">
+            <div class="full-box">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" placeholder="Digite seu E-mail" data-min-length="5" data-required data-email-validate>
+            </div>
+
+            <div class="half-box spacing">
+                <label for="name">Nome</label>
+                <input type="text" name="name" id="name" placeholder="Digite o seu nome" data-max-length="16" data-only-letters data-required>
+            </div>
+
+            <div class="half-box">
+                <label for="name">Sobrenome</label>
+                <input type="text" name="lastname" id="lastname" placeholder="Digite o seu sobrenome" data-required>
+            </div>
+
+            <div class="half-box spacing">
+                <label for="password">Senha</label>
+                <input type="password" name="password" id="password" placeholder="Digite a sua senha" data-required data-password-validate data-min-length="5">
+            </div>
+
+            <div class="half-box">
+                <label for="passconfirmation">Confirmação de senha</label>
+                <input type="password" name="passconfirmation" id="passconfirmation" placeholder="Confirme a sua senha" data-equal="password" data-required data-min-length="5">
+            </div>
+
+            <div class="full-box">
+                <input type="checkbox" name="agreement" id="agreement">
+                <label for="agreement" id="agreement-label">Eu li e aceito os <a href="#">termos de uso</a></label>
+            </div>
+            
+            <div class="full-box">
+                <input type="submit" id="btn-submit" value="Registrar">
+            </div>
+        </form>
+    </div>
+    <p class="error-validation template"></p>
+</body>
+</html>
