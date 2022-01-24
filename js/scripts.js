@@ -17,30 +17,30 @@ class Validator {
     validate(form) {
 
         // resgata todas as validações
-        var currentValidations = document.querySelectorAll('form .error-validation');
+        let currentValidations = document.querySelectorAll('form .error-validation');
 
         if(currentValidations.length > 0) {
             this.cleanValidations(currentValidations);
         }
 
         // pegar os inputs
-        var inputs = form.getElementsByTagName('input');
+        let inputs = form.getElementsByTagName('input');
 
         // HTMLCollection -> array (pega o elemento e transforma em um array de vários elementos)
-        var inputsArray = [...inputs];
+        let inputsArray = [...inputs];
 
         // loop nos inputs e validação mediante ao que for encontrado
         inputsArray.forEach(function(input) {
 
             //loop em todas as validações existentes
-            for(var i = 0; this.validations.length > i; i++){
+            for(let i = 0; this.validations.length > i; i++){
                 if(input.getAttribute(this.validations[i]) != null) {
                     
                     // limpando a string para virar u método
-                    var method = this.validations[i].replace('data-', '').replace('-', '');
+                    let method = this.validations[i].replace('data-', '').replace('-', '');
 
                     // valor do input
-                    var value = input.getAttribute(this.validations[i]);
+                    let value = input.getAttribute(this.validations[i]);
 
                     // invoca o método
                     this[method](input, value);
@@ -55,35 +55,39 @@ class Validator {
     // verifica se um input tem um número mínimo de caracteres
     minlength(input, minValue) {
 
-        var inputlength = input.value.length;
+        let inputlength = input.value.length;
 
-        var errorMessage = `O campo precisa ter pelo menos ${minValue} caracteres`;
+        let errorMessage = `O campo precisa ter pelo menos ${minValue} caracteres`;
 
         if(inputlength < minValue) {
             this.printMessage(input, errorMessage);
-        var
+        }
+
+
     }
 
     // verifica se um input passou do limite de carateres
     maxlength(input, maxValue) {
 
-        var inputlength = input.value.length;
+        let inputlength = input.value.length;
 
-        var errorMessage = `O campo precisa ter menos que ${maxValue} caracteres`;
+        let errorMessage = `O campo precisa ter menos que ${maxValue} caracteres`;
 
         if(inputlength > maxValue) {
             this.printMessage(input, errorMessage);
         }
-        var
+        
+    }
 
     // valida emails
     emailvalidate(input) {
 
         // email@email.com -> email@email.com.br
-        var re = /\S+@\S+\.\S+/;
+        let re = /\S+@\S+\.\S+/;
 
-        var email = input.valuvar
-        var errorMessage = `Por favor, insira um e-mail válido`;
+        let email = input.value;
+
+        let errorMessage = `Por favor, insira um e-mail válido`;
 
         if(!re.test(email)) {
             this.printMessage(input, errorMessage);
@@ -92,11 +96,11 @@ class Validator {
 
     // valida se o campo tem apenas letras
     onlyletters(input) {
-        var re = /^[A-Za-z]+S/;
+        let re = /^[A-Za-z]+S/;
 
-        var inputValue = input.value;
+        let inputValue = input.value;
 
-        var errorMessage = `Este campo não aceita númevar nem caracteres especiais`
+        let errorMessage = `Este campo não aceita númeors nem caracteres especiais`
 
         if(!re.test(inputValue)) {
             this.printMessage(input, errorMessage);
@@ -107,14 +111,14 @@ class Validator {
     printMessage(input, msg) {
 
         // quantidade de erros
-        var errorsQty = input.parentNode.querySelector('.error-validation');
+        let errorsQty = input.parentNode.querySelector('.error-validation');
 
         if(errorsQty === null) {
-            var template = document.querySelector('.error-validation').cloneNode(true);
+            let template = document.querySelector('.error-validation').cloneNode(true);
 
             template.textContent = msg;
 
-            var inputParent = input.parentNode;
+            let inputParent = input.parentNode;
 
             template.classList.remove('template');
 
@@ -126,20 +130,21 @@ class Validator {
         // verifica se o input é requerido
         required(input) {
             
-            var inputValue = input.value;
+            let inputValue = input.value;
 
             if(inputValue === '') {
-                var errorMessage = `Este campo é obrigatório`
+                let errorMessage = `Este campo é obrigatório`
 
                 this.printMessage(input, errorMessage);
             }
-    var
+        }
+
         // verifica se dois campos são iguais
         equal(input, inputName) {
 
-            var inputToCompare = document.getElementsByName(inputName)[0];
+            let inputToCompare = document.getElementsByName(inputName)[0];
 
-            var errorMessage = `Verifique novamente a sua senha`
+            let errorMessage = `Verifique novamente a sua senha`
 
             if(input.value != inputToCompare.value) {
                 this.printMessage(input, errorMessage);
@@ -150,12 +155,12 @@ class Validator {
         passwordvalidate(input) {
 
             // transforma uma string em um array
-            var charArr = input.value.split("");
+            let charArr = input.value.split("");
 
-            var uppercases = 0;
-            var numbers = 0;
+            let uppercases = 0;
+            let numbers = 0;
 
-            for(var i = 0; charArr.length > i; i++) {
+            for(let i = 0; charArr.length > i; i++) {
                if(charArr[i] === charArr[i].toUpperCase() && isNaN(parseInt(charArr[i]))) {
                    uppercases++;
                } else if(!isNaN(parseInt(charArr[i]))) {
@@ -164,7 +169,7 @@ class Validator {
             }
 
             if(uppercases === 0 || numbers === 0) {
-               var errorMessage = `Insira letras maiúsculas, minúsculas e números`
+               let errorMessage = `Insira letras maiúsculas, minúsculas e números`
 
                this.printMessage(input, errorMessage);
             }
@@ -180,10 +185,10 @@ class Validator {
 }
 
     
-var form = document.getElementById("register-form");
-var submit = document.getElementById("btn-submit");
+let form = document.getElementById("register-form");
+let submit = document.getElementById("btn-submit");
 
-var validator = new Validator();
+let validator = new Validator();
 
 
 // evento que dispara as validações
