@@ -100,7 +100,7 @@ class Validator {
 
         let inputValue = input.value;
 
-        let errorMessage = `Este campo não aceita númeors nem caracteres especiais`
+        let errorMessage = `Este campo não aceita números nem caracteres especiais`
 
         if(!re.test(inputValue)) {
             this.printMessage(input, errorMessage);
